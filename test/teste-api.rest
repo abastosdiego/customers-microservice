@@ -1,0 +1,99 @@
+// Instalar a extensão "Rest Client" do VSCode
+
+// Configurar o arquivo settings.json do VSCode :
+// "rest-client.excludeHostsForProxy": ["localhost","127.0.0.1"]
+
+@urlBase = http://localhost:3000
+
+####################################################
+## Autenticação
+####################################################
+
+# @name autenticar
+#POST {{urlBase}}/auth/get_token
+#Content-Type: application/json
+#
+#{
+#  "username": "00000000002",
+#  "password": "123456"
+#}
+
+###
+#@token = {{autenticar.response.body.$.token}}
+
+####################################################
+
+################################
+# CLIENTS
+################################
+
+# @name getAllClients
+GET {{urlBase}}/clients
+
+###
+
+# @name addClient
+POST {{urlBase}}/clients
+Content-Type: application/json
+
+{
+    "name": "IBM"
+}
+
+
+
+# ###
+
+# # @name getProductById
+# GET {{urlBase}}/products/d5d3de57-c590-4735-a745-ba5645e74ab7
+
+
+
+# ###
+
+# # @name updateProduct
+# PUT {{urlBase}}/products/d5d3de57-c590-4735-a745-ba5645e74ab7
+# Content-Type: application/json
+
+# {
+#     "description": "Caneta Preta",
+#     "price": 11
+# }
+
+# ###
+
+# # @name deleteProduct
+# DELETE {{urlBase}}/products/d5d3de57-c590-4735-a745-ba5645e74ab7
+
+
+# ################################
+# # TYPE PRODUCT
+# ################################
+
+# # @name getTypeProductById
+# GET {{urlBase}}/type-products/728798a1-c4dd-4149-b30d-ecd54b9333a5
+
+# ###
+
+# # @name addTypeProduct
+# POST {{urlBase}}/type-products
+# Content-Type: application/json
+
+# {
+#     "description": "Material escritório"
+# }
+
+# ###
+
+# # @name updateTypeProduct
+# PUT {{urlBase}}/type-products/728798a1-c4dd-4149-b30d-ecd54b9333a5
+# Content-Type: application/json
+
+# {
+#     "description": "Material escritório (alt)"
+# }
+
+# ###
+
+# # @name deleteTypeProduct
+# DELETE {{urlBase}}/type-products/728798a1-c4dd-4149-b30d-ecd54b9333a5

@@ -17,7 +17,7 @@ services:
 #      no_proxy: localhost, postgres
       NODE_ENV: development
       INSTALL_NODE_MODULES: true
-      CREATE_NEW_PROJECT_NESTJS: false
+      CREATE_NEW_PROJECT_NESTJS: true
     restart: unless-stopped
   #   depends_on:
   #     - mongo
