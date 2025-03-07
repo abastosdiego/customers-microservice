@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post } from "@nestjs/common";
-import { ClientRepository } from "./client.repository";
+import { ClientRepository } from "../repository/client.repository";
 
 @Controller('/clients')
 export class ClientController {
