@@ -18,5 +18,5 @@ fi
 chmod -R 777 .
 
 echo "🚀 Iniciando servidor NestJS..."
-exec nodemon --legacy-watch --exec "ts-node -r tsconfig-paths/register" src/main.ts
+exec nodemon --legacy-watch --exitcrash --exec "ts-node -r tsconfig-paths/register" src/main.ts
 #exec npm run start:dev

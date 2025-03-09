@@ -16,7 +16,7 @@ services:
 #      https_proxy: ${https_proxy}
 #      no_proxy: localhost, postgres
       NODE_ENV: development
-      INSTALL_NODE_MODULES: true
+      INSTALL_NODE_MODULES: false
       CREATE_NEW_PROJECT_NESTJS: false
     restart: unless-stopped
   #   depends_on:

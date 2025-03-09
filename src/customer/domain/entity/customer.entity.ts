@@ -1,11 +1,15 @@
-export abstract class Client {
+import { v4 as uuidv4 } from 'uuid';
+
+export abstract class Customer {
+  protected readonly id: string;
+
     constructor(
-      protected readonly id: string,
       protected name: string,
       protected email: string,
       protected createdAt: Date = new Date(),
       protected updatedAt: Date = new Date(),
     ) {
+      this.id = uuidv4();
       this.validateName(name);
       this.validateEmail(email);
     }

@@ -6,10 +6,10 @@
 @urlBase = http://localhost:3000
 
 ####################################################
-## Autenticação
+## Login
 ####################################################
 
-# @name autenticar
+# @name login
 #POST {{urlBase}}/auth/get_token
 #Content-Type: application/json
 #
@@ -19,25 +19,28 @@
 #}
 
 ###
-#@token = {{autenticar.response.body.$.token}}
+#@token = {{login.response.body.$.token}}
 
 ####################################################
 
 ################################
-# CLIENTS
+# CUSTOMERS
 ################################
 
-# @name getAllClients
-GET {{urlBase}}/clients
+# @name getAllCustomers
+GET {{urlBase}}/customers
 
 ###
 
-# @name addClient
-POST {{urlBase}}/clients
+# @name addCustomer
+POST {{urlBase}}/customers
 Content-Type: application/json
 
 {
-    "name": "IBM"
+    "type": "individual",
+    "name": "IBM",
+    "email": "ibm@gmail.com",
+    "document": "83.445.688/0001-41"
 }
 
 
