@@ -21,8 +21,6 @@
 ###
 #@token = {{login.response.body.$.token}}
 
-####################################################
-
 ################################
 # CUSTOMERS
 ################################
@@ -43,60 +41,30 @@ Content-Type: application/json
     "document": "48.290.111/0001-06"
 }
 
+###
+@id = {{addCustomer.response.body.$.id}}
 
+###
 
-# ###
+# @name getCustomerById
+GET {{urlBase}}/customers/{{id}}
 
-# # @name getProductById
-# GET {{urlBase}}/products/d5d3de57-c590-4735-a745-ba5645e74ab7
+###
 
+# @name putCustomer
+PUT {{urlBase}}/customers/{{id}}
+Content-Type: application/json
 
+{
+    "type": "legal",
+    "name": "IBM (alt)",
+    "email": "ibm@gmail.com",
+    "document": "48.290.111/0001-06"
+}
 
-# ###
+###
 
-# # @name updateProduct
-# PUT {{urlBase}}/products/d5d3de57-c590-4735-a745-ba5645e74ab7
-# Content-Type: application/json
+# @name deleteCustomer
+DELETE {{urlBase}}/customers/{{id}}
 
-# {
-#     "description": "Caneta Preta",
-#     "price": 11
-# }
-
-# ###
-
-# # @name deleteProduct
-# DELETE {{urlBase}}/products/d5d3de57-c590-4735-a745-ba5645e74ab7
-
-
-# ################################
-# # TYPE PRODUCT
-# ################################
-
-# # @name getTypeProductById
-# GET {{urlBase}}/type-products/728798a1-c4dd-4149-b30d-ecd54b9333a5
-
-# ###
-
-# # @name addTypeProduct
-# POST {{urlBase}}/type-products
-# Content-Type: application/json
-
-# {
-#     "description": "Material escritório"
-# }
-
-# ###
-
-# # @name updateTypeProduct
-# PUT {{urlBase}}/type-products/728798a1-c4dd-4149-b30d-ecd54b9333a5
-# Content-Type: application/json
-
-# {
-#     "description": "Material escritório (alt)"
-# }
-
-# ###
-
-# # @name deleteTypeProduct
-# DELETE {{urlBase}}/type-products/728798a1-c4dd-4149-b30d-ecd54b9333a5
+###

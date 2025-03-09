@@ -8,7 +8,7 @@ import { CustomerRepository } from "src/customer/infra/repository/customer.repos
 export class CreateCustomerUseCase {
   constructor(private readonly customerRepository: CustomerRepository) {}
 
-  async execute(data: { type: 'individual' | 'legal'; name: string; email: string; document: string }): Promise<void> {
+  async execute(data: { type: 'individual' | 'legal'; name: string; email: string; document: string }): Promise<Customer> {
     let customer: Customer;
     
     if (data.type === 'individual') {
@@ -16,6 +16,7 @@ export class CreateCustomerUseCase {
     } else {
       customer = new LegalCustomer(data.name, data.email, data.document);
     }
-    return await this.customerRepository.save(customer);
+    await this.customerRepository.save(customer);
+    return customer;
   }
 }
