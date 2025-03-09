@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import { DomainError } from '../error/domain-error';
 
 export abstract class Customer {
   protected readonly id: string;
@@ -51,14 +52,14 @@ export abstract class Customer {
     // Validações
     private validateName(name: string): void {
       if (!name || name.trim().length === 0) {
-        throw new Error('Name cannot be empty');
+        throw new DomainError('Name cannot be empty');
       }
     }
   
     private validateEmail(email: string): void {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
-        throw new Error('Invalid email');
+        throw new DomainError('Invalid email');
       }
     }
   }

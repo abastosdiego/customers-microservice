@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { Customer } from "src/customer/domain/entity/customer.entity";
 import { IndividualCustomer } from "src/customer/domain/entity/individual-customer.entity";
 import { LegalCustomer } from "src/customer/domain/entity/legal-customer.entity";
@@ -16,7 +16,6 @@ export class CreateCustomerUseCase {
     } else {
       customer = new LegalCustomer(data.name, data.email, data.document);
     }
-    
     return await this.customerRepository.save(customer);
   }
 }

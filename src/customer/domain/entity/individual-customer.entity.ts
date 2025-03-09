@@ -1,3 +1,4 @@
+import { DomainError } from "../error/domain-error";
 import { Customer } from "./customer.entity";
 
 export class IndividualCustomer extends Customer {
@@ -21,7 +22,7 @@ export class IndividualCustomer extends Customer {
     private validateCPF(cpf: string): void {
       const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
       if (!cpfRegex.test(cpf)) {
-        throw new Error('Invalid CPF');
+        throw new DomainError('Invalid CPF');
       }
     }
 

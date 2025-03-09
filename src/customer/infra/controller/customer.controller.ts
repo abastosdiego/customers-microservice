@@ -9,7 +9,7 @@ export class CustomerController {
 
     @Post()
     async create(@Body() customerData: any) {
-        this.createCustomerUseCase.execute(customerData);
+        await this.createCustomerUseCase.execute(customerData);
         return customerData;
     }
 

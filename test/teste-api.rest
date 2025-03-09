@@ -37,10 +37,10 @@ POST {{urlBase}}/customers
 Content-Type: application/json
 
 {
-    "type": "individual",
+    "type": "legal",
     "name": "IBM",
     "email": "ibm@gmail.com",
-    "document": "83.445.688/0001-41"
+    "document": "48.290.111/0001-06"
 }
 
 
