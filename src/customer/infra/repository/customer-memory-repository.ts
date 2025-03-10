@@ -1,8 +1,9 @@
 import { Injectable } from "@nestjs/common";
-import { Customer } from "src/customer/domain/entity/customer.entity";
+import { Customer } from "src/customer/domain/entity/customer-entity";
+import { CustomerRepository } from "src/customer/domain/repository/customer-repository";
 
 @Injectable()
-export class CustomerRepository {
+export class CustomerMemoryRepository implements CustomerRepository {
     private customers: Customer[] = [];
     
     async save(customer: Customer): Promise<void> {

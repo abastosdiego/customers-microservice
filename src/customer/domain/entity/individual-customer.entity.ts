@@ -1,5 +1,5 @@
 import { DomainError } from "../error/domain-error";
-import { Customer } from "./customer.entity";
+import { Customer } from "./customer-entity";
 
 export class IndividualCustomer extends Customer {
     constructor(

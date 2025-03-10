@@ -1,12 +1,12 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
-import { Customer } from "src/customer/domain/entity/customer.entity";
+import { Inject, Injectable } from "@nestjs/common";
+import { Customer } from "src/customer/domain/entity/customer-entity";
 import { IndividualCustomer } from "src/customer/domain/entity/individual-customer.entity";
 import { LegalCustomer } from "src/customer/domain/entity/legal-customer.entity";
-import { CustomerRepository } from "src/customer/infra/repository/customer.repository";
+import { CustomerRepository } from "src/customer/domain/repository/customer-repository";
 
 @Injectable()
 export class CreateCustomerUseCase {
-  constructor(private readonly customerRepository: CustomerRepository) {}
+  constructor(@Inject('CustomerRepository') private readonly customerRepository: CustomerRepository) {}
 
   async execute(data: { type: 'individual' | 'legal'; name: string; email: string; document: string }): Promise<Customer> {
     let customer: Customer;
