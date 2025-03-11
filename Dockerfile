@@ -16,8 +16,11 @@ RUN npm install --save-dev @types/uuid
 # Instala o TypeORM
 RUN npm install @nestjs/typeorm typeorm
 
+# Instala a biblioteca de config do nest.js que permite ler o arquivo .env
+RUN npm install @nestjs/config
+
 # Install postgres driver
-RUN npm install pg --save
+RUN npm install pg
 
 # Expõe a porta da aplicação
 EXPOSE 3000
