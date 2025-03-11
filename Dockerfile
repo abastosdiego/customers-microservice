@@ -13,6 +13,12 @@ RUN npm install -g @nestjs/cli nodemon uuid
 # Instala o types do uuid
 RUN npm install --save-dev @types/uuid
 
+# Instala o TypeORM
+RUN npm install @nestjs/typeorm typeorm
+
+# Install postgres driver
+RUN npm install pg --save
+
 # Expõe a porta da aplicação
 EXPOSE 3000
 

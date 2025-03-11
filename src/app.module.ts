@@ -9,3 +9,9 @@ import { CustomerModule } from './customer/customer.module';
   providers: [AppService],
 })
 export class AppModule {}
+
+
+//TypeOrmModule.forRootAsync({
+//  useClass: TypeORMConfigService,
+//  inject: [TypeORMConfigService]
+//})
