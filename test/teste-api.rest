@@ -35,10 +35,10 @@ POST {{urlBase}}/customers
 Content-Type: application/json
 
 {
-    "type": "legal",
+    "type": "IC",
     "name": "IBM",
     "email": "ibm@gmail.com",
-    "document": "48.290.111/0001-06"
+    "document": "128.545.500-00"
 }
 
 ###
@@ -56,10 +56,10 @@ PUT {{urlBase}}/customers/{{id}}
 Content-Type: application/json
 
 {
-    "type": "legal",
+    "type": "IC",
     "name": "IBM (alt)",
     "email": "ibm@gmail.com",
-    "document": "48.290.111/0001-06"
+    "document": "128.545.500-00"
 }
 
 ###

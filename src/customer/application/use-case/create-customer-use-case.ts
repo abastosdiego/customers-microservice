@@ -8,10 +8,10 @@ import { CustomerRepository } from "src/customer/domain/repository/customer-repo
 export class CreateCustomerUseCase {
   constructor(@Inject('CustomerRepository') private readonly customerRepository: CustomerRepository) {}
 
-  async execute(data: { type: 'individual' | 'legal'; name: string; email: string; document: string }): Promise<Customer> {
+  async execute(data: { type: 'IC' | 'LC'; name: string; email: string; document: string }): Promise<Customer> {
     let customer: Customer;
     
-    if (data.type === 'individual') {
+    if (data.type === 'IC') {
       customer = new IndividualCustomer(data.name, data.email, data.document);
     } else {
       customer = new LegalCustomer(data.name, data.email, data.document);

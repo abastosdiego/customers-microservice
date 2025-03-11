@@ -5,38 +5,71 @@ import { IndividualCustomer } from "src/customer/domain/entity/individual-custom
 import { CustomerRepository } from "src/customer/domain/repository/customer-repository";
 import { Repository } from "typeorm";
 import { CustomerTypeORMEntity } from "./typeORM-entity/customer.typeORM.entity";
+import { LegalCustomer } from "src/customer/domain/entity/legal-customer.entity";
 
 @Injectable()
 export class CustomerTypeORMRepository implements CustomerRepository {
-    private customers: Customer[] = [];
-    
+
     constructor(
         @InjectRepository(CustomerTypeORMEntity)
         private readonly customerRepository: Repository<CustomerTypeORMEntity>
     ) {}
 
     async save(customer: Customer): Promise<void> {
-        const index = this.customers.findIndex(c => c.getId() === customer.getId());
-        if (index !== -1) {
-            this.customers[index] = customer;
-        } else {
-            this.customers.push(customer);
-        }
+        const customerData = this.domainEntityToTypeORMEntity(customer);
+        await this.customerRepository.save(customerData);
     }
 
     async list(): Promise<Customer[]> {
-        //return this.customers;
-        const customers = (await this.customerRepository.find()).map(
-           (u) => new IndividualCustomer(u.name,u.email,"000.000.000-00",new Date(),new Date())
-        );
+        const customers = (await this.customerRepository.find()).map((customerData) => {
+            return this.typeORMEntityToDomainEntity(customerData);
+        });
         return customers;
     }
     
     async findById(id: string): Promise<Customer | null> {
-        return this.customers.find(customer => customer.getId() === id) || null;
+        console.log(id);
+        const customerData = await this.customerRepository.findOneBy({id: id});
+        console.log(customerData);
+        if (!customerData) {
+            throw new Error('Não encontrado!');
+        }
+        return this.typeORMEntityToDomainEntity(customerData);
     }
     
     async delete(id: string): Promise<void> {
-        this.customers = this.customers.filter(customer => customer.getId() !== id);
+        await this.customerRepository.delete(id);
+    }
+
+    private typeORMEntityToDomainEntity(customerData: CustomerTypeORMEntity): Customer {
+        if (customerData.type === 'IC') {
+            return new IndividualCustomer(
+                customerData.name,
+                customerData.email,
+                customerData.cpf,
+                new Date(),
+                new Date()
+            );
+        } else {
+            return new LegalCustomer(
+                customerData.name,
+                customerData.email,
+                customerData.cnpj,
+                new Date(),
+                new Date()
+            );
+        }
+    }
+
+    private domainEntityToTypeORMEntity(customer: Customer): any {
+        const customerData = {
+            id: customer.getId(),
+            name: customer.getName(),
+            email: customer.getEmail(),
+            type: customer instanceof IndividualCustomer ? 'IC' : 'LC',
+            cpf: customer instanceof IndividualCustomer ? customer.getCPF() : undefined,
+            cnpj: customer instanceof LegalCustomer ? customer.getCNPJ() : undefined
+        };
+        return customerData;
     }
 }

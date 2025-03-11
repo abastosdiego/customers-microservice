@@ -3,24 +3,24 @@ services:
     container_name: customers-microservice
     build:
       context: .
-      args:
-        http_proxy: ${http_proxy}
-        https_proxy: ${https_proxy}
+#      args:
+#        http_proxy: ${http_proxy}
+#        https_proxy: ${https_proxy}
     ports:
       - "3000:3000"
     volumes:
       - ./:/app
 #      - /app/node_modules  # Evita sobrescrever node_modules do container, porém atrapalha o vscode. Pois ele não encontra as bibliotecas instaladas no projeto.
     environment:
-      http_proxy: ${http_proxy}
-      https_proxy: ${https_proxy}
-      no_proxy: localhost, customers-postgres
+#      http_proxy: ${http_proxy}
+#      https_proxy: ${https_proxy}
+#      no_proxy: localhost, customers-postgres
       NODE_ENV: development
-      INSTALL_NODE_MODULES: true
+      INSTALL_NODE_MODULES: false
       CREATE_NEW_PROJECT_NESTJS: false
     restart: unless-stopped
-  #   depends_on:
-  #     - mongo
+    depends_on:
+      - customers-postgres
   #     - mongo-express
   #     - postgres
   customers-postgres:
