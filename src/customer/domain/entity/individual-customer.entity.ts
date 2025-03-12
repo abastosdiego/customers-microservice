@@ -1,16 +1,39 @@
+import { v4 as uuidv4 } from 'uuid';
 import { DomainError } from "../error/domain-error";
 import { Customer } from "./customer-entity";
 
 export class IndividualCustomer extends Customer {
-    constructor(
+    private constructor(
+      id: string,
       name: string,
       email: string,
       private cpf: string,
       createdAt?: Date,
       updatedAt?: Date,
     ) {
-      super(name, email, createdAt, updatedAt);
+      super(id, name, email, createdAt, updatedAt);
       this.validateCPF(cpf);
+    }
+
+    public static create(
+      name: string,
+      email: string,
+      cpf: string,
+      createdAt?: Date,
+      updatedAt?: Date,
+    ) {
+      const id = uuidv4();
+      return new IndividualCustomer(id, name, email, cpf, createdAt, updatedAt)
+    }
+
+    public static populate(
+      id: string,
+      name: string,
+      email: string,
+      cpf: string,
+      createdAt?: Date,
+      updatedAt?: Date) {
+      return new IndividualCustomer(id, name, email, cpf, createdAt, updatedAt);
     }
   
     // Getter específico

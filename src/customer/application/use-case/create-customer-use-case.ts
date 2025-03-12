@@ -12,9 +12,9 @@ export class CreateCustomerUseCase {
     let customer: Customer;
     
     if (data.type === 'IC') {
-      customer = new IndividualCustomer(data.name, data.email, data.document);
+      customer = IndividualCustomer.create(data.name, data.email, data.document);
     } else {
-      customer = new LegalCustomer(data.name, data.email, data.document);
+      customer = LegalCustomer.create(data.name, data.email, data.document);
     }
     await this.customerRepository.save(customer);
     return customer;

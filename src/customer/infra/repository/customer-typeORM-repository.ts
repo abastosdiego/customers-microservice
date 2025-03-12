@@ -2,10 +2,10 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Customer } from "src/customer/domain/entity/customer-entity";
 import { IndividualCustomer } from "src/customer/domain/entity/individual-customer.entity";
+import { LegalCustomer } from "src/customer/domain/entity/legal-customer.entity";
 import { CustomerRepository } from "src/customer/domain/repository/customer-repository";
 import { Repository } from "typeorm";
 import { CustomerTypeORMEntity } from "./typeORM-entity/customer.typeORM.entity";
-import { LegalCustomer } from "src/customer/domain/entity/legal-customer.entity";
 
 @Injectable()
 export class CustomerTypeORMRepository implements CustomerRepository {
@@ -28,9 +28,7 @@ export class CustomerTypeORMRepository implements CustomerRepository {
     }
     
     async findById(id: string): Promise<Customer | null> {
-        console.log(id);
         const customerData = await this.customerRepository.findOneBy({id: id});
-        console.log(customerData);
         if (!customerData) {
             throw new Error('Não encontrado!');
         }
@@ -43,7 +41,8 @@ export class CustomerTypeORMRepository implements CustomerRepository {
 
     private typeORMEntityToDomainEntity(customerData: CustomerTypeORMEntity): Customer {
         if (customerData.type === 'IC') {
-            return new IndividualCustomer(
+            return IndividualCustomer.populate(
+                customerData.id,
                 customerData.name,
                 customerData.email,
                 customerData.cpf,
@@ -51,7 +50,8 @@ export class CustomerTypeORMRepository implements CustomerRepository {
                 new Date()
             );
         } else {
-            return new LegalCustomer(
+            return LegalCustomer.populate(
+                customerData.id,
                 customerData.name,
                 customerData.email,
                 customerData.cnpj,
